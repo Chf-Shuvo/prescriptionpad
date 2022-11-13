@@ -58,7 +58,7 @@
               <div class="row pb-30">
                 <div class="col-12">
                   <div class="forgot-password">
-                    <a href="forgot-password.html">Forgot Password</a>
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modelId">Forgot Password</a>
                   </div>
                 </div>
               </div>
@@ -77,6 +77,27 @@
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- Modal Content --}}
+  <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form action="{{ route('send.password.reset.link', 'patient') }}" method="post">
+            @csrf
+            <div class="form-row">
+              <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <label for="">Email:</label>
+                <input type="email" name="email" class="form-control" data-validation="required">
+              </div>
+              <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <button type="submit" class="btn btn-success btn-sm float-right">send password reset link</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

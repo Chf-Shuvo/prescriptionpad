@@ -15,4 +15,9 @@ class Doctor extends Authenticatable
     protected $casts = [
         "gender" => GenderType::class,
     ];
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class, "doctor_id", "id");
+    }
 }

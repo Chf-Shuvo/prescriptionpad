@@ -15,6 +15,11 @@
             <i class="micon dw dw-notepad-1"></i> <span class="mtext">Book Appointment</span>
           </a>
         </li>
+        <li>
+          <a href="{{ route('patient.pharmacy') }}" class="dropdown-toggle no-arrow {{ Request::routeIs('patient.pharmacy') ? 'active' : '' }}">
+            <i class="micon dw dw-briefcase"></i> <span class="mtext">Pharmacy List</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

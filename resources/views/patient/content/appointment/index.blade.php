@@ -30,9 +30,14 @@
               <tr>
                 <td>{{ $item->doctor->first_name }}</td>
                 <td>{{ $item->schedule }}</td>
-                <td>{{ $item->status->value }}</td>
+                <td class="{{ $item->status == Status::Active ? 'text-success' : 'text-danger' }}">{{ $item->status->value }}</td>
                 <td>
-                  view if attended
+                  @if ($item->status == Status::Active)
+                    <a href="javascript:void(0)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="waiting...."><i class="icon-copy dw dw-wall-clock1"></i></a>
+                  @else
+                    <a href="{{ route('patient.appointment.view', $item->id) }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="view this appointment details"><i
+                        class="icon-copy dw dw-view"></i></a>
+                  @endif
                 </td>
               </tr>
             @endforeach

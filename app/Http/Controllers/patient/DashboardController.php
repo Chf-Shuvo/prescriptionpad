@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\patient;
 
 use App\Models\User;
+use App\Models\Doctor;
+use App\Models\Pharmacy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Doctor;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
@@ -52,6 +53,16 @@ class DashboardController extends Controller
                 "patient.content.appointment.doctorList",
                 compact("doctors")
             );
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function pharmacyList()
+    {
+        try {
+            $pharmacies = Pharmacy::all();
+            return view("patient.content.pharmacy", compact("pharmacies"));
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

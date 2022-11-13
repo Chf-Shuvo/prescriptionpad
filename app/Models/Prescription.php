@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use App\Enums\Status;
+use App\Models\User;
+use App\Models\Doctor;
 use Illuminate\Database\Eloquent\Model;
 
-class Appointment extends Model
+class Prescription extends Model
 {
-    protected $table = "appointments";
+    protected $table = "prescriptions";
     protected $guarded = ["id"];
-
-    protected $casts = [
-        "status" => Status::class,
-    ];
 
     public function doctor()
     {
@@ -22,10 +19,5 @@ class Appointment extends Model
     public function patient()
     {
         return $this->belongsTo(User::class, "patient_id", "id");
-    }
-
-    public function prescription()
-    {
-        return $this->belongsTo(Prescription::class, "id", "appointment_id");
     }
 }

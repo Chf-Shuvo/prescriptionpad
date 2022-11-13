@@ -14,7 +14,7 @@ class MedicalHistoryController extends Controller
     {
         try {
             $doctors = Doctor::all();
-            $appointments = Appointment::orderBy("status", "asc")->get();
+            $appointments = Appointment::orderBy("schedule", "asc")->get();
             return view(
                 "patient.content.appointment.index",
                 compact("doctors", "appointments")
@@ -55,6 +55,18 @@ class MedicalHistoryController extends Controller
                 "success"
             );
             return redirect()->back();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function viewAppointment(Appointment $appointment)
+    {
+        try {
+            return view(
+                "patient.content.appointment.view",
+                compact("appointment")
+            );
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

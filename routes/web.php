@@ -27,6 +27,22 @@ Route::get("/", function () {
 })->name("base");
 /**
  * **************************
+ * Passsword Reset Routes
+ * **************************
+ */
+Route::controller(LoginController::class)->group(function () {
+    Route::post("password/{user_type}", "sendPasswordResetLink")->name(
+        "send.password.reset.link"
+    );
+    Route::get("password/{user_type}/{user_email}", "setPassword")->name(
+        "password.reset.set"
+    );
+    Route::patch("user-password-update", "passwordUpdate")->name(
+        "password.reset.update"
+    );
+});
+/**
+ * **************************
  * Auth Routes
  * **************************
  */
@@ -52,6 +68,7 @@ Route::controller(DashboardController::class)->group(function () {
                 "profile.update"
             );
             Route::get("doctor/list", "doctorList")->name("doctors");
+            Route::get("pharmacy/list", "pharmacyList")->name("pharmacy");
         }
     );
 });
@@ -76,6 +93,10 @@ Route::controller(MedicalHistoryController::class)->group(function () {
             Route::post("appointment/book", "appointmentBook")->name(
                 "appointment.book"
             );
+            Route::get(
+                "appointment/view/{appointment}",
+                "viewAppointment"
+            )->name("appointment.view");
         }
     );
 });
